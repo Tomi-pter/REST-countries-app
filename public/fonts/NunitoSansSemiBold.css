@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'NunitoSansSemiBold';
+    src: url('fonts/NunitoSansSemiBold.eot');
+    src: url('fonts/NunitoSansSemiBold.eot') format('embedded-opentype'),
+         url('fonts/NunitoSansSemiBold.woff2') format('woff2'),
+         url('fonts/NunitoSansSemiBold.woff') format('woff'),
+         url('fonts/NunitoSansSemiBold.ttf') format('truetype'),
+         url('fonts/NunitoSansSemiBold.svg#NunitoSansSemiBold') format('svg');
+}

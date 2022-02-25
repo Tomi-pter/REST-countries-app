@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+     :root {
+        --dark-mode-blue: hsl(209, 23%, 22%);
+        --dark-mode-bg: hsl(207, 26%, 17%);
+        --light-mode-text: hsl(200, 15%, 8%);
+        --light-mode-input: hsl(0, 0%, 52%);
+        --light-mode-bg: hsl(0, 0%, 98%);
+        --dark-mode-text: hsl(0, 0%, 100%);
+    }
+    @font-face {
+        font-family: 'NSL';
+        src: url('../public/fonts/NunitoSansLight.eot');
+        src: url('../public/fonts/NunitoSansLight.eot') format('embedded-opentype'), url('../public/fonts/NunitoSansLight.woff2') format('woff2'), url('../public/fonts/NunitoSansLight.woff') format('woff'), url('../public/fonts/NunitoSansLight.ttf') format('truetype'), url('../public/fonts/NunitoSansLight.svg#NunitoSansLight') format('svg');
+    }
+    @font-face {
+        font-family: 'NSEB';
+        src: url('../public/fonts/NunitoSansExtraBold.eot');
+        src: url('../public/fonts/NunitoSansExtraBold.eot') format('embedded-opentype'), url('../public/fonts/NunitoSansExtraBold.woff2') format('woff2'), url('../public/fonts/NunitoSansExtraBold.woff') format('woff'), url('../public/fonts/NunitoSansExtraBold.ttf') format('truetype'), url('../public/fonts/NunitoSansExtraBold.svg#NunitoSansExtraBold') format('svg');
+    }
+    @font-face {
+        font-family: 'NSSB';
+        src: url('../public/fonts/NunitoSansSemiBold.eot');
+        src: url('../public/fonts/NunitoSansSemiBold.eot') format('embedded-opentype'), url('../public/fonts/NunitoSansSemiBold.woff2') format('woff2'), url('../public/fonts/NunitoSansSemiBold.woff') format('woff'), url('../public/fonts/NunitoSansSemiBold.ttf') format('truetype'), url('../public/fonts/NunitoSansSemiBold.svg#NunitoSansSemiBold') format('svg');
+    }
+}
