@@ -14,8 +14,8 @@ function Countries() {
       const response = await fetch(`https://restcountries.com/v3.1/all`);
       const data = await response.json();
       const sortByName = data.slice(0).sort((a, b) => {
-        let x = a.name.official.toLowerCase();
-        let y = b.name.official.toLowerCase();
+        let x = a.name.common.toLowerCase();
+        let y = b.name.common.toLowerCase();
         return x < y ? -1 : x > y ? 1 : 0;
       });
       setCountries(sortByName);
@@ -35,8 +35,7 @@ function Countries() {
 
     if (searchParams) {
       const filteredCountries = countries.filter((filter) => {
-        return Object.values(filter)
-          .join("")
+        return JSON.stringify(filter)
           .toLowerCase()
           .includes(input.toLowerCase());
       });
@@ -51,7 +50,12 @@ function Countries() {
       `https://restcountries.com/v3.1/region/${region}`
     );
     const data = await response.json();
-    setByRegion(data);
+    const sortByName = data.slice(0).sort((a, b) => {
+      let x = a.name.common.toLowerCase();
+      let y = b.name.common.toLowerCase();
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
+    setByRegion(sortByName);
     console.log(region);
     console.log(data);
   };
@@ -72,7 +76,7 @@ function Countries() {
               <Link key={name.official} to={`/${capital}`}>
                 <section className="rounded-lg shadow-sm overflow-hidden bg-light-element">
                   <img src={flags.svg} alt="" className="overflow-hidden" />
-                  <h2 className="font-NSSB py-4 px-4">{name.official}</h2>
+                  <h2 className="font-NSSB py-4 px-4">{name.common}</h2>
                   <p className="px-4">
                     <span className="font-NSSB">Population:</span> {population}
                   </p>
@@ -94,7 +98,11 @@ function Countries() {
               <Link key={name.official} to={`/${capital}`}>
                 <section className="rounded-lg shadow-sm overflow-hidden bg-light-element">
                   <img src={flags.svg} alt="" className="overflow-hidden" />
-                  <h2 className="font-NSSB py-4 px-4">{name.official}</h2>
+                  <h2 className="font-NSSB py-4 px-4">{name.common}</h2>
+                  <p className="px-4">
+                    <span className="font-NSSB">Official Name:</span>{" "}
+                    {name.official}
+                  </p>
                   <p className="px-4">
                     <span className="font-NSSB">Population:</span> {population}
                   </p>
