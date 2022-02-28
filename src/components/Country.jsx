@@ -5,22 +5,21 @@ function Country() {
   const [country, setCountry] = useState([]);
   const { capital } = useParams();
 
-  const fetchCountry = async () => {
-    try {
-      const response = await fetch(
-        `https://restcountries.com/v3.1/capital/${capital}`
-      );
-      const data = await response.json();
-      setCountry(data);
-      console.log(data);
-    } catch {
-      console.log("Fetch request failed");
-    }
-  };
-
   useEffect(() => {
+    const fetchCountry = async () => {
+      try {
+        const response = await fetch(
+          `https://restcountries.com/v3.1/capital/${capital}`
+        );
+        const data = await response.json();
+        setCountry(data);
+        console.log(data);
+      } catch {
+        console.log("Fetch request failed");
+      }
+    };
     fetchCountry();
-  }, []);
+  }, [capital]);
 
   const paraDetails = (detail) => {
     let obj = "";
@@ -72,6 +71,22 @@ function Country() {
                   })}
                 </div>
                 <p>Languages: {paraDetails(languages)}</p>
+                <div>
+                  <span>
+                    Border Countries:{" "}
+                    {borders ? (
+                      Object.values(borders).map((value) => {
+                        return (
+                          <div key={value} className="inline-block mx-2">
+                            <p>{value}</p>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <span className="inline">None</span>
+                    )}
+                  </span>
+                </div>
               </article>
             );
           }

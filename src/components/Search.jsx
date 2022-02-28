@@ -1,7 +1,6 @@
-import Filter from "./Filter";
 import { searchIcon } from "./SearchIcon";
 
-function Search() {
+function Search({ searchCountries, searchParams }) {
   return (
     <div className="bg-light-bg dark:bg-dark-bg p-4 text-sm relative font-NSL">
       <input
@@ -9,11 +8,10 @@ function Search() {
         type="search"
         name="search"
         placeholder="Search for any country..."
+        value={searchParams}
+        onChange={(e) => searchCountries(e.target.value)}
       />
-      <button type="submit" className="absolute left-8 top-9">
-        {searchIcon}
-      </button>
-      <Filter />
+      <button className="absolute left-8 top-9">{searchIcon}</button>
     </div>
   );
 }
