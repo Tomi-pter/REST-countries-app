@@ -40,7 +40,7 @@ function Country() {
     <div className="bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text min-h-screen ">
       <section className="2xl:container 2xl:mx-auto">
         <Link to={`/`}>
-          <button className="my-5 ml-12 py-1 px-6 rounded shadow-skin text-base bg-light-element dark:bg-dark-element">
+          <button className="mt-12 mb-8 ml-12 py-1 px-6 rounded shadow-skin text-base bg-light-element dark:bg-dark-element">
             {LeftArrow} Back
           </button>
         </Link>
