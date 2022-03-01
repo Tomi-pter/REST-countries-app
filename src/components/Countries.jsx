@@ -76,7 +76,7 @@ function Countries() {
       </section>
 
       {searchParams.length > 0 ? (
-        <section className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
+        <main className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
           {filtered.map(({ name, flags, population, region, capital }) => {
             return (
               <Link key={name.official} to={`/${capital}`}>
@@ -84,7 +84,7 @@ function Countries() {
                   <div className="h-32">
                     <img
                       src={flags.svg}
-                      alt=""
+                      alt="country flag"
                       className="object-cover h-32 w-full"
                     />
                   </div>
@@ -103,9 +103,9 @@ function Countries() {
               </Link>
             );
           })}
-        </section>
+        </main>
       ) : (
-        <section className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
+        <main className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
           {countries.map(({ name, flags, population, region, capital }) => {
             return (
               <Link key={name.official} to={`/${capital}`}>
@@ -113,7 +113,7 @@ function Countries() {
                   <div className="h-32">
                     <img
                       src={flags.svg}
-                      alt=""
+                      alt="country flag"
                       className="object-cover h-32 w-full"
                     />
                   </div>
@@ -132,7 +132,7 @@ function Countries() {
               </Link>
             );
           })}
-        </section>
+        </main>
       )}
     </div>
   );

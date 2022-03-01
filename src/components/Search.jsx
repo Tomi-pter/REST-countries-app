@@ -11,9 +11,9 @@ function Search({ searchCountries, searchParams }) {
         value={searchParams}
         onChange={(e) => searchCountries(e.target.value)}
       />
-      <button className="absolute left-8 top-9 text-light-text dark:text-dark-text">
+      <span className="absolute left-8 top-9 text-light-text dark:text-dark-text">
         {searchIcon}
-      </button>
+      </span>
     </div>
   );
 }
