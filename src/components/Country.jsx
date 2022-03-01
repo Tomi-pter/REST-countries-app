@@ -4,13 +4,13 @@ import { LeftArrow } from "./LeftArrow";
 
 function Country() {
   const [country, setCountry] = useState([]);
-  const { capital } = useParams();
+  const { name } = useParams();
 
   useEffect(() => {
     const fetchCountry = async () => {
       try {
         const response = await fetch(
-          `https://restcountries.com/v3.1/capital/${capital}`
+          `https://restcountries.com/v3.1/capital/${name}`
         );
         const data = await response.json();
         setCountry(data);
@@ -20,7 +20,7 @@ function Country() {
       }
     };
     fetchCountry();
-  }, [capital]);
+  }, [name]);
 
   const paraDetails = (detail) => {
     let obj = "";

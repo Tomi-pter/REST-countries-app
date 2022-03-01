@@ -9,7 +9,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Countries />} />
-        <Route path="/:capital" element={<Country />} />
+        <Route path="/:name" element={<Country />} />
       </Routes>
     </Router>
   );

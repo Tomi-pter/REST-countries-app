@@ -71,8 +71,12 @@ function Countries() {
     return input.toLocaleString();
   };
 
-  const setUrl = (capital) => {
-    new URL(`/${capital}, https://tomi-know-your-countries.netlify.app`);
+  const setUrl = (name) => {
+    let url = new URL(
+      `/${name}`,
+      "https://tomi-know-your-countries.netlify.app"
+    );
+    return url;
   };
 
   return (
@@ -87,7 +91,7 @@ function Countries() {
           <main className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
             {filtered.map(({ name, flags, population, region, capital }) => {
               return (
-                <Link key={name.official} to={setUrl(capital)}>
+                <Link key={name.official} to={setUrl(capital).href}>
                   <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text">
                     <div className="h-32">
                       <img
@@ -121,7 +125,7 @@ function Countries() {
         <main className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
           {countries.map(({ name, flags, population, region, capital }) => {
             return (
-              <Link key={name.official} to={`/${capital}`}>
+              <Link key={name.official} to={`/${setUrl(capital).href}`}>
                 <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text">
                   <div className="h-32">
                     <img
