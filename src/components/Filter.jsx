@@ -14,6 +14,7 @@ function Filter({ filterByRegion }) {
         <option value="Filter by Region" disabled hidden>
           Filter by Region
         </option>
+        <option value="all">All Regions</option>
         <option value="Africa">Africa</option>
         <option value="Americas">Americas</option>
         <option value="Asia">Asia</option>
