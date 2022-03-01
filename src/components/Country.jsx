@@ -10,7 +10,7 @@ function Country() {
     const fetchCountry = async () => {
       try {
         const response = await fetch(
-          `https://restcountries.com/v3.1/capital/${name}`
+          `https://restcountries.com/v3.1/name/${name}`
         );
         const data = await response.json();
         setCountry(data);
