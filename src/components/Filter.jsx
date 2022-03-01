@@ -4,11 +4,11 @@ function Filter({ filterByRegion }) {
       <select
         name="regions"
         id="select"
-        className="my-4 ml-5 p-2 shadow-skin w-44 "
+        className="my-4 ml-5 p-3 shadow-skin w-52 bg-light-element dark:bg-dark-element dark:text-dark-text"
         defaultValue="Filter by Region"
         onChange={(e) => filterByRegion(e.target.value)}
       >
-        <option value="Filter by Region" disabled>
+        <option value="Filter by Region" disabled hidden>
           Filter by Region
         </option>
         <option value="Africa">Africa</option>

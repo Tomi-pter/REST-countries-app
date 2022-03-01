@@ -64,21 +64,34 @@ function Countries() {
     byRegion && setCountries(byRegion);
   }, [byRegion]);
 
+  const populationToLocale = (input) => {
+    return input.toLocaleString();
+  };
+
   return (
-    <>
-      <Search searchCountries={searchCountries} searchParams={searchParams} />
-      <Filter filterByRegion={filterByRegion} />
+    <div className="bg-light-bg dark:bg-dark-bg min-h-screen">
+      <section className="md:flex justify-between mr-5 2xl:container 2xl:mx-auto">
+        <Search searchCountries={searchCountries} searchParams={searchParams} />
+        <Filter filterByRegion={filterByRegion} />
+      </section>
 
       {searchParams.length > 0 ? (
-        <section className="grid grid-cols-1 gap-5 py-5 px-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto bg-light-bg dark:bg-dark-bg">
+        <section className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
           {filtered.map(({ name, flags, population, region, capital }) => {
             return (
               <Link key={name.official} to={`/${capital}`}>
-                <section className="rounded-lg shadow-sm overflow-hidden bg-light-element">
-                  <img src={flags.svg} alt="" className="overflow-hidden" />
+                <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text">
+                  <div className="h-32">
+                    <img
+                      src={flags.svg}
+                      alt=""
+                      className="object-cover h-32 w-full"
+                    />
+                  </div>
                   <h2 className="font-NSSB py-4 px-4">{name.common}</h2>
                   <p className="px-4">
-                    <span className="font-NSSB">Population:</span> {population}
+                    <span className="font-NSSB">Population:</span>{" "}
+                    {populationToLocale(population)}
                   </p>
                   <p className="px-4">
                     <span className="font-NSSB">Region:</span> {region}
@@ -92,19 +105,22 @@ function Countries() {
           })}
         </section>
       ) : (
-        <section className="grid grid-cols-1 gap-5 py-5 px-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto bg-light-bg dark:bg-dark-bg">
+        <section className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
           {countries.map(({ name, flags, population, region, capital }) => {
             return (
               <Link key={name.official} to={`/${capital}`}>
-                <section className="rounded-lg shadow-sm overflow-hidden bg-light-element">
-                  <img src={flags.svg} alt="" className="overflow-hidden" />
-                  <h2 className="font-NSSB py-4 px-4">{name.common}</h2>
+                <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text">
+                  <div className="h-32">
+                    <img
+                      src={flags.svg}
+                      alt=""
+                      className="object-cover h-32 w-full"
+                    />
+                  </div>
+                  <h2 className="font-NSSB p-4">{name.common}</h2>
                   <p className="px-4">
-                    <span className="font-NSSB">Official Name:</span>{" "}
-                    {name.official}
-                  </p>
-                  <p className="px-4">
-                    <span className="font-NSSB">Population:</span> {population}
+                    <span className="font-NSSB">Population:</span>{" "}
+                    {populationToLocale(population)}
                   </p>
                   <p className="px-4">
                     <span className="font-NSSB">Region:</span> {region}
@@ -118,7 +134,7 @@ function Countries() {
           })}
         </section>
       )}
-    </>
+    </div>
   );
 }
 
