@@ -46,18 +46,21 @@ function Countries() {
   };
 
   const filterByRegion = async (region) => {
-    const response = await fetch(
-      `https://restcountries.com/v3.1/region/${region}`
-    );
-    const data = await response.json();
-    const sortByName = data.slice(0).sort((a, b) => {
-      let x = a.name.common.toLowerCase();
-      let y = b.name.common.toLowerCase();
-      return x < y ? -1 : x > y ? 1 : 0;
-    });
-    setByRegion(sortByName);
+    if (region === "all") {
+      fetchCountries();
+    } else {
+      const response = await fetch(
+        `https://restcountries.com/v3.1/region/${region}`
+      );
+      const data = await response.json();
+      const sortByName = data.slice(0).sort((a, b) => {
+        let x = a.name.common.toLowerCase();
+        let y = b.name.common.toLowerCase();
+        return x < y ? -1 : x > y ? 1 : 0;
+      });
+      setByRegion(sortByName);
+    }
     console.log(region);
-    console.log(data);
   };
 
   useEffect(() => {
@@ -66,6 +69,10 @@ function Countries() {
 
   const populationToLocale = (input) => {
     return input.toLocaleString();
+  };
+
+  const setUrl = (capital) => {
+    new URL(`/${capital}, https://tomi-know-your-countries.netlify.app`);
   };
 
   return (
@@ -80,7 +87,7 @@ function Countries() {
           <main className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
             {filtered.map(({ name, flags, population, region, capital }) => {
               return (
-                <Link key={name.official} to={`/${capital}`}>
+                <Link key={name.official} to={setUrl(capital)}>
                   <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text">
                     <div className="h-32">
                       <img
