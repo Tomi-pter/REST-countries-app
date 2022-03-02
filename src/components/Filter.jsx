@@ -1,7 +1,10 @@
 function Filter({ filterByRegion }) {
   return (
     <div className="bg-light-bg dark:bg-dark-bg text-sm relative font-NSL">
-      <label htmlFor="select" className="ml-4 font-NSEB">
+      <label
+        htmlFor="select"
+        className="ml-4 font-NSEB text-light-text dark:text-dark-text"
+      >
         Regions:{" "}
       </label>
       <select

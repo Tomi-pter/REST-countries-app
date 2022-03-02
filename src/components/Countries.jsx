@@ -118,7 +118,7 @@ function Countries() {
           </main>
         ) : (
           <main className="flex justify-center items-center min-h-[70vh]">
-            <h2 className="uppercase font-NSEB text-2xl">
+            <h2 className="uppercase font-NSEB text-2xl text-light-text dark:text-dark-text">
               No countries match your search
             </h2>
           </main>
