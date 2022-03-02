@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { LeftArrow } from "./LeftArrow";
+import loader from "../loader/loader.gif";
 
 function Country() {
   const [country, setCountry] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { capital } = useParams();
 
   useEffect(() => {
@@ -14,6 +16,7 @@ function Country() {
         );
         const data = await response.json();
         setCountry(data);
+        setLoading(false);
         console.log(data);
       } catch {
         console.log("Fetch request failed");
@@ -44,94 +47,101 @@ function Country() {
             {LeftArrow} Back
           </button>
         </Link>
-        {country.map(
-          ({
-            name,
-            flags,
-            population,
-            region,
-            subregion,
-            capital,
-            tld,
-            currencies,
-            languages,
-            borders,
-          }) => {
-            return (
-              <article
-                key={name.official}
-                className="text-base mt-10 py-4 px-10 md:flex gap-20 md:justify-around "
-              >
-                <div className="md:w-[40%]">
-                  <img src={flags.svg} alt="" className="mb-10" />
-                </div>
-                <section>
-                  <h1 className="font-NSEB text-xl pb-6">{name.official}</h1>
-                  <section className="md:flex md:justify-between gap-10 mb-10">
-                    <div>
-                      <p>
-                        <span className="font-NSSB">Native Name:</span>{" "}
-                        {Object.values(name.nativeName)[0].official}
-                      </p>
-                      <p>
-                        <span className="font-NSSB">Population:</span>{" "}
-                        {populationToLocale(population)}
-                      </p>
-                      <p>
-                        <span className="font-NSSB">Region:</span> {region}
-                      </p>
-                      <p>
-                        <span className="font-NSSB">Sub Region:</span>{" "}
-                        {subregion}
-                      </p>
-                      <p>
-                        <span className="font-NSSB">Capital:</span> {capital}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="pt-6">
-                        <span className="font-NSSB">Top Level Domain: </span>{" "}
-                        {tld}
-                      </p>
+        {loading ? (
+          <main className="min-h-screen flex flex-col justify-start items-center pt-32">
+            <img src={loader} alt="loading..." />
+            <h1 className="font-NSEB pt-2">🌍🧑🏾‍🍳🍳...</h1>
+          </main>
+        ) : (
+          country.map(
+            ({
+              name,
+              flags,
+              population,
+              region,
+              subregion,
+              capital,
+              tld,
+              currencies,
+              languages,
+              borders,
+            }) => {
+              return (
+                <article
+                  key={name.official}
+                  className="text-base mt-10 py-4 px-10 md:flex gap-20 md:justify-around "
+                >
+                  <div className="md:w-[40%]">
+                    <img src={flags.svg} alt="" className="mb-10" />
+                  </div>
+                  <section>
+                    <h1 className="font-NSEB text-xl pb-6">{name.official}</h1>
+                    <section className="md:flex md:justify-between gap-10 mb-10">
                       <div>
-                        <span className="font-NSSB">Currencies: </span>
-                        {Object.values(currencies).map(({ name, symbol }) => {
-                          return (
-                            <p key={name} className="inline-block pr-1">
-                              {name} ({symbol}),
-                            </p>
-                          );
-                        })}
+                        <p>
+                          <span className="font-NSSB">Native Name:</span>{" "}
+                          {Object.values(name.nativeName)[0].official}
+                        </p>
+                        <p>
+                          <span className="font-NSSB">Population:</span>{" "}
+                          {populationToLocale(population)}
+                        </p>
+                        <p>
+                          <span className="font-NSSB">Region:</span> {region}
+                        </p>
+                        <p>
+                          <span className="font-NSSB">Sub Region:</span>{" "}
+                          {subregion}
+                        </p>
+                        <p>
+                          <span className="font-NSSB">Capital:</span> {capital}
+                        </p>
                       </div>
-                      <p>
-                        <span className="font-NSSB">Languages: </span>{" "}
-                        {paraDetails(languages)}
-                      </p>
+                      <div>
+                        <p className="pt-6">
+                          <span className="font-NSSB">Top Level Domain: </span>{" "}
+                          {tld}
+                        </p>
+                        <div>
+                          <span className="font-NSSB">Currencies: </span>
+                          {Object.values(currencies).map(({ name, symbol }) => {
+                            return (
+                              <p key={name} className="inline-block pr-1">
+                                {name} ({symbol}),
+                              </p>
+                            );
+                          })}
+                        </div>
+                        <p>
+                          <span className="font-NSSB">Languages: </span>{" "}
+                          {paraDetails(languages)}
+                        </p>
+                      </div>
+                    </section>
+                    <div className="py-6 lg:inline">
+                      <span className="font-NSSB">Border Countries: </span>
+                      {borders ? (
+                        <div className="flex justify-center">
+                          {Object.values(borders).map((value) => {
+                            return (
+                              <span
+                                key={value}
+                                className="my-4 mx-2 py-1 px-2 rounded shadow-skin text-base bg-light-element dark:bg-dark-element "
+                              >
+                                <p>{value}</p>
+                              </span>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <span className="inline">None</span>
+                      )}
                     </div>
                   </section>
-                  <div className="py-6 lg:inline">
-                    <span className="font-NSSB">Border Countries: </span>
-                    {borders ? (
-                      <div className="flex justify-center">
-                        {Object.values(borders).map((value) => {
-                          return (
-                            <span
-                              key={value}
-                              className="my-4 mx-2 py-1 px-2 rounded shadow-skin text-base bg-light-element dark:bg-dark-element "
-                            >
-                              <p>{value}</p>
-                            </span>
-                          );
-                        })}
-                      </div>
-                    ) : (
-                      <span className="inline">None</span>
-                    )}
-                  </div>
-                </section>
-              </article>
-            );
-          }
+                </article>
+              );
+            }
+          )
         )}
       </section>
     </div>

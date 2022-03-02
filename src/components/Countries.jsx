@@ -2,11 +2,13 @@ import Search from "./Search";
 import Filter from "./Filter";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import loader from "../loader/loader.gif";
 
 function Countries() {
   const [countries, setCountries] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [byRegion, setByRegion] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useState("");
 
   const fetchCountries = async () => {
@@ -19,6 +21,7 @@ function Countries() {
         return x < y ? -1 : x > y ? 1 : 0;
       });
       setCountries(sortByName);
+      setLoading(false);
       console.log(data);
       console.log(sortByName);
     } catch {
@@ -40,6 +43,7 @@ function Countries() {
           .includes(input.toLowerCase());
       });
       setFiltered(filteredCountries);
+      setLoading(false);
     } else {
       setFiltered(countries);
     }
@@ -59,6 +63,7 @@ function Countries() {
         return x < y ? -1 : x > y ? 1 : 0;
       });
       setByRegion(sortByName);
+      setLoading(false);
     }
     console.log(region);
   };
@@ -86,13 +91,18 @@ function Countries() {
         <Filter filterByRegion={filterByRegion} />
       </section>
 
-      {searchParams.length > 0 ? (
+      {loading ? (
+        <main className="min-h-screen flex flex-col justify-start items-center pt-32">
+          <img src={loader} alt="loading..." />
+          <h1 className="font-NSEB pt-2">🌍🧑🏾‍🍳🍳...</h1>
+        </main>
+      ) : searchParams.length > 0 ? (
         filtered.length > 0 ? (
           <main className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
             {filtered.map(({ name, flags, population, region, capital }) => {
               return (
                 <Link key={name.official} to={`${setUrl(capital).pathname}`}>
-                  <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text">
+                  <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text transition-transform ease-in-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none">
                     <div className="h-32">
                       <img
                         src={flags.svg}
@@ -124,11 +134,11 @@ function Countries() {
           </main>
         )
       ) : (
-        <main className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto ">
+        <main className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto">
           {countries.map(({ name, flags, population, region, capital }) => {
             return (
               <Link key={name.official} to={`${setUrl(capital).pathname}`}>
-                <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text">
+                <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text transition-transform ease-in-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none">
                   <div className="h-32">
                     <img
                       src={flags.svg}
