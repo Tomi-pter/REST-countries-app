@@ -86,7 +86,7 @@ function Countries() {
 
   return (
     <div className="bg-light-bg dark:bg-dark-bg min-h-screen">
-      <section className="md:flex justify-between mr-5 2xl:container 2xl:mx-auto">
+      <section className="md:flex justify-between pt-7 mr-5 2xl:container 2xl:mx-auto">
         <Search searchCountries={searchCountries} searchParams={searchParams} />
         <Filter filterByRegion={filterByRegion} />
       </section>
