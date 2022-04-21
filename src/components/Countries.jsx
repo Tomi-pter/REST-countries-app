@@ -10,6 +10,8 @@ function Countries() {
   const [byRegion, setByRegion] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useState("");
+  const [plus50, setPlus50] = useState([0, 50]);
+  const [disabled, setDisabled] = useState(false);
 
   const fetchCountries = async () => {
     try {
@@ -84,8 +86,13 @@ function Countries() {
     return url;
   };
 
+  const loadMore = () => {
+    setPlus50([0, plus50[1] + 50]);
+    plus50[1] >= 199 && setDisabled(true);
+  };
+
   return (
-    <div className="bg-light-bg dark:bg-dark-bg min-h-screen">
+    <div className="bg-light-bg dark:bg-dark-bg min-h-screen pb-5">
       <section className="md:flex justify-between pt-7 mr-5 2xl:container 2xl:mx-auto">
         <Search searchCountries={searchCountries} searchParams={searchParams} />
         <Filter filterByRegion={filterByRegion} />
@@ -135,34 +142,43 @@ function Countries() {
         )
       ) : (
         <main className="grid grid-cols-1 gap-12 py-5 px-12 sm:px-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:container 2xl:mx-auto">
-          {countries.map(({ name, flags, population, region, capital }) => {
-            return (
-              <Link key={name.official} to={`${setUrl(capital).pathname}`}>
-                <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text transition-transform ease-in-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none">
-                  <div className="h-32">
-                    <img
-                      src={flags.svg}
-                      alt="country flag"
-                      className="object-cover h-32 w-full"
-                    />
-                  </div>
-                  <h2 className="font-NSSB p-4">{name.common}</h2>
-                  <p className="px-4">
-                    <span className="font-NSSB">Population:</span>{" "}
-                    {populationToLocale(population)}
-                  </p>
-                  <p className="px-4">
-                    <span className="font-NSSB">Region:</span> {region}
-                  </p>
-                  <p className="px-4 pb-4">
-                    <span className="font-NSSB">Capital:</span> {capital}
-                  </p>
-                </section>
-              </Link>
-            );
-          })}
+          {countries
+            .slice(plus50[0], plus50[1])
+            .map(({ name, flags, population, region, capital }) => {
+              return (
+                <Link key={name.official} to={`${setUrl(capital).pathname}`}>
+                  <section className="rounded-lg shadow-sm overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text transition-transform ease-in-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none">
+                    <div className="h-32">
+                      <img
+                        src={flags.svg}
+                        alt="country flag"
+                        className="object-cover h-32 w-full"
+                      />
+                    </div>
+                    <h2 className="font-NSSB p-4">{name.common}</h2>
+                    <p className="px-4">
+                      <span className="font-NSSB">Population:</span>{" "}
+                      {populationToLocale(population)}
+                    </p>
+                    <p className="px-4">
+                      <span className="font-NSSB">Region:</span> {region}
+                    </p>
+                    <p className="px-4 pb-4">
+                      <span className="font-NSSB">Capital:</span> {capital}
+                    </p>
+                  </section>
+                </Link>
+              );
+            })}
         </main>
       )}
+      <button
+        onClick={loadMore}
+        disabled={disabled}
+        className="block mx-auto my-4 border-1 py-1 px-4 shadow-md font-NSL overflow-hidden bg-light-element dark:bg-dark-element text-light-text dark:text-dark-text transition-transform ease-in-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none disabled:transform-none"
+      >
+        More
+      </button>
     </div>
   );
 }
